@@ -257,7 +257,7 @@ static DB_misc_t plugin = {
     .plugin.name = "Copy info GTK2",
 #endif
     .plugin.descr =
-        "Copy information of selected tacks to the clipboard "
+        "Copy information about selected tracks to the clipboard "
         "using a custom format",
     .plugin.copyright =
         "Copy name plugin for DeaDBeeF Player\n"
