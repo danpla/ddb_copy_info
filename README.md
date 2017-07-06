@@ -11,6 +11,13 @@ The format string can be changed in the plugin's preferences
 The default one is `%tracknumber%. %artist% - %title% (%length%)`.
 
 
+### Download
+
+You can download binaries from
+[the DeaDBeeF's website](http://deadbeef.sourceforge.net/plugins.html).
+Packages contain both GTK 2 and GTK 3 versions of the plugin.
+
+
 ### Building from sources
 
 You can compile the plugin either with Make or CMake. Both systems
