@@ -42,13 +42,13 @@ gtk2: $(GTK2_TARGET)
 gtk3: $(GTK3_TARGET)
 
 $(GTK2_TARGET): $(GTK2_OBJECTS)
-	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS) $(GTK2_LIBS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS) $(GTK2_LIBS)
 
 %_gtk2.o: %.c
 	$(CC) $(CFLAGS) $(GTK2_CFLAGS) $(DEADBEEF_INC) -c -o $@ $<
 
 $(GTK3_TARGET): $(GTK3_OBJECTS)
-	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS) $(GTK3_LIBS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS) $(GTK3_LIBS)
 
 %_gtk3.o: %.c
 	$(CC) $(CFLAGS) $(GTK3_CFLAGS) $(DEADBEEF_INC) -c -o $@ $<
