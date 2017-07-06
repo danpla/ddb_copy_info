@@ -25,7 +25,7 @@ create `gtk2` and `gtk3` build targets.
 
 Before compiling, ensure you have DeaDbeeF's API headers
 (`deadbeef/deadbeef.h` and `deadbeef/gtkui_api.h`). Both build systems
-provide a `DEADBEEF_INC` option to provide additional search paths.
+provide a `DEADBEEF_INC` option to add extra search paths.
 
 Obviously, you'll also need a dev package of GTK+.
 
