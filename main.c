@@ -261,7 +261,7 @@ static DB_misc_t plugin = {
         "Copy information about selected tracks to the clipboard "
         "using a custom format",
     .plugin.copyright =
-        "Copy name plugin for DeaDBeeF Player\n"
+        "Copy info plugin for DeaDBeeF Player\n"
         "Copyright (c) 2017 Daniel Plakhotich\n"
         "\n"
         "This software is provided 'as-is', without any express or implied\n"
