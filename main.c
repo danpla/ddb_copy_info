@@ -273,11 +273,11 @@ static DB_misc_t plugin = {
         "freely, subject to the following restrictions:\n"
         "\n"
         "1. The origin of this software must not be misrepresented; you must not\n"
-        "claim that you wrote the original software. If you use this software\n"
-        "in a product, an acknowledgement in the product documentation would be\n"
-        "appreciated but is not required.\n"
+        "   claim that you wrote the original software. If you use this software\n"
+        "   in a product, an acknowledgement in the product documentation would be\n"
+        "   appreciated but is not required.\n"
         "2. Altered source versions must be plainly marked as such, and must not be\n"
-        "misrepresented as being the original software.\n"
+        "   misrepresented as being the original software.\n"
         "3. This notice may not be removed or altered from any source distribution.\n"
     ,
     .plugin.website = "https://github.com/danpla/ddb_copy_info",
