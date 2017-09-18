@@ -252,11 +252,10 @@ static DB_misc_t plugin = {
     .plugin.type = DB_PLUGIN_MISC,
 #if GTK_CHECK_VERSION(3, 0, 0)
     .plugin.id = "ddb_copy_info_gtk3",
-    .plugin.name = "Copy info GTK3",
 #else
     .plugin.id = "ddb_copy_info_gtk2",
-    .plugin.name = "Copy info GTK2",
 #endif
+    .plugin.name = "Copy info",
     .plugin.descr =
         "Copy information about selected tracks to the clipboard "
         "using a custom format",
