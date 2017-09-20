@@ -167,7 +167,14 @@ static int copy_info(DB_plugin_action_t *action, int ctx)
                         // If the whole space is used, the string may be
                         // trimmed. Note that the length returned by
                         // tf_eval() doesn't include the trailing null.
-                        || (size_t)ret == avail_size - 2) {
+                        //
+                        // WORKAROUND: We use >= rather than == as
+                        // a workaround for a bug in tf_eval() that makes
+                        // it sometimes return more than was actually
+                        // written. See:
+                        //   github.com/DeaDBeeF-Player/deadbeef/issues/1877
+                        //
+                        || (size_t)ret >= avail_size - 2) {
                     // Expand the capacity and try again.
                     text_capacity *= 2;
                     char* new_text = (char *)realloc(text, text_capacity);
