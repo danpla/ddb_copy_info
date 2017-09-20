@@ -1,3 +1,9 @@
+## 1.0.2 (2017-09-20)
+
+* Fixed segfault caused by DeaDBeeF's bug 1877.
+  See https://github.com/DeaDBeeF-Player/deadbeef/issues/1877
+* Removed GTK version from the plugin's name
+
 
 ## 1.0.1 (2017-07-06)
 
