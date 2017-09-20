@@ -123,14 +123,7 @@ static int copy_info(DB_plugin_action_t *action, int ctx)
     DB_playItem_t *it = deadbeef->plt_get_first(plt, PL_MAIN);
     while (it) {
         if (ctx == DDB_ACTION_CTX_PLAYLIST || deadbeef->pl_is_selected(it)) {
-            ddb_tf_context_t tf_ctx = {
-                ._size = sizeof(ddb_tf_context_t),
-                .flags = DDB_TF_CONTEXT_HAS_INDEX | DDB_TF_CONTEXT_NO_DYNAMIC,
-                .it = it,
-                .plt = plt,
-                .idx = deadbeef->pl_get_idx_of(it),
-                .iter = PL_MAIN,
-            };
+            const int it_idx = deadbeef->pl_get_idx_of(it);
 
             while (1) {
                 // We reserve a space for a question mark (in case of
@@ -149,13 +142,23 @@ static int copy_info(DB_plugin_action_t *action, int ctx)
                 int ret;
                 if (avail_size < MIN_AVAIL_SIZE)
                     ret = 0;
-                else
+                else {
+                    ddb_tf_context_t tf_ctx = {
+                        ._size = sizeof(ddb_tf_context_t),
+                        .flags = DDB_TF_CONTEXT_HAS_INDEX | DDB_TF_CONTEXT_NO_DYNAMIC,
+                        .it = it,
+                        .plt = plt,
+                        .idx = it_idx,
+                        .iter = PL_MAIN,
+                    };
+
                     // We pass 1 less than avail_size, since 1 char is
                     // reserved for a newline, so at least 2 chars are
                     // available for tf_eval() (it will use the last
                     // one for null).
                     ret = deadbeef->tf_eval(
                         &tf_ctx, tf, text + text_size, avail_size - 1);
+                }
 
                 if (ret < 0) {
                     // Skip errors.
