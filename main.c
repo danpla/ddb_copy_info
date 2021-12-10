@@ -15,14 +15,15 @@
 
 
 #define VERSION_MAJOR 1
-#define VERSION_MINOR 0
-#define VERSION_PATCH 2
+#define VERSION_MINOR 1
+#define VERSION_PATCH 0
 
 
 static DB_functions_t *deadbeef;
 static ddb_gtkui_t *gtkui_plugin;
 
 static char* tf;
+
 
 #define CFG_PREFIX "copy_info."
 
@@ -288,7 +289,7 @@ static DB_misc_t plugin = {
         "using a custom format",
     .plugin.copyright =
         "Copy info plugin for DeaDBeeF Player\n"
-        "Copyright (c) 2017 Daniel Plakhotich\n"
+        "Copyright (c) 2017-2021 Daniel Plakhotich\n"
         "\n"
         "This software is provided 'as-is', without any express or implied\n"
         "warranty. In no event will the authors be held liable for any damages\n"
