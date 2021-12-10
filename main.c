@@ -24,9 +24,13 @@ static ddb_gtkui_t *gtkui_plugin;
 
 static char* tf;
 
+#define CFG_PREFIX "copy_info."
 
-#define CFG_FORMAT "copy_info.format"
-#define DEFAULT_FORMAT "%tracknumber%. %artist% - %title% (%length%)"
+#define CFG_FORMAT CFG_PREFIX "format"
+#define CFG_FORMAT_DEFAULT "%tracknumber%. %artist% - %title% (%length%)"
+
+#define CFG_ADD_TRAILING_NEWLINE CFG_PREFIX "add_trailing_newline"
+#define CFG_ADD_TRAILING_NEWLINE_DEFAULT 1
 
 
 static void recompile_tf(void)
@@ -36,7 +40,7 @@ static void recompile_tf(void)
 
     deadbeef->conf_lock();
     tf = deadbeef->tf_compile(
-        deadbeef->conf_get_str_fast(CFG_FORMAT, DEFAULT_FORMAT));
+        deadbeef->conf_get_str_fast(CFG_FORMAT, CFG_FORMAT_DEFAULT));
     deadbeef->conf_unlock();
 }
 
@@ -84,7 +88,7 @@ static void copy_tf_error_msg_to_clipboard(void)
     const char *msg = "DeaDBeeF copy info wrong format: %s\n";
 
     deadbeef->conf_lock();
-    const char* fmt = deadbeef->conf_get_str_fast(CFG_FORMAT, DEFAULT_FORMAT);
+    const char* fmt = deadbeef->conf_get_str_fast(CFG_FORMAT, CFG_FORMAT_DEFAULT);
 
     int ret = snprintf(NULL, 0, msg, fmt);
     if (ret >= 0) {
@@ -210,6 +214,15 @@ static int copy_info(DB_plugin_action_t *action, int ctx)
     assert(text_size < text_capacity);
     text[text_size] = 0;
 
+    if (text_size > 0
+            && !deadbeef->conf_get_int(
+                CFG_ADD_TRAILING_NEWLINE,
+                CFG_ADD_TRAILING_NEWLINE_DEFAULT)) {
+        --text_size;
+        assert(text[text_size] == '\n');
+        text[text_size] = 0;
+    }
+
     copy_to_clipboard(text, text_size);
 
     free(text);
@@ -250,8 +263,12 @@ static int message(uint32_t id, uintptr_t ctx, uint32_t p1, uint32_t p2)
 }
 
 
+#define STR(V) #V
+#define XSTR(V) STR(V)
+
 static const char configdialog[] =
-    "property \"Format\" entry " CFG_FORMAT " \"" DEFAULT_FORMAT "\";";
+    "property \"Format\" entry " CFG_FORMAT " \"" CFG_FORMAT_DEFAULT "\";\n"
+    "property \"Add trailing newline\" checkbox " CFG_ADD_TRAILING_NEWLINE " " XSTR(CFG_ADD_TRAILING_NEWLINE_DEFAULT) ";\n";
 
 
 static DB_misc_t plugin = {
